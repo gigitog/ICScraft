@@ -7,8 +7,7 @@ import me.ics.questplugin.Buttons.SetButton;
 import me.ics.questplugin.QuestManager.Commands.Answer;
 import me.ics.questplugin.QuestManager.Commands.QuestOperator;
 import me.ics.questplugin.QuestManager.Commands.SetCheckpoint;
-import me.ics.questplugin.QuestManager.Listeners.PlayerMove;
-import me.ics.questplugin.QuestManager.Listeners.PlayerOut;
+import me.ics.questplugin.QuestManager.Listeners.*;
 import me.ics.questplugin.TpWarp.DelTpWarp;
 import me.ics.questplugin.TpWarp.SetTpWarp;
 import me.ics.questplugin.TpWarp.ListenerTp;
@@ -49,9 +48,12 @@ public final class QuestPlugin extends JavaPlugin {
         getCommand("quest").setExecutor(new QuestOperator(this, fileName));
 
         getServer().getPluginManager().registerEvents(new PlayerOut(this, fileName), this);
-//        getServer().getPluginManager().registerEvents(new PlayerClick(this, fileName), this);
+        getServer().getPluginManager().registerEvents(new PlayerClick(this, fileName), this);
         getServer().getPluginManager().registerEvents(new PlayerMove(this,
                 fileName, "/checkpoint_data.json"), this);
+        getServer().getPluginManager().registerEvents(new PlayerThrow(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerTeleport(this,fileName), this);
+        getServer().getPluginManager().registerEvents(new PlayerPlace(this), this);
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN +  "|| QUEST MANAGER ||");
     }
 
